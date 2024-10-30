@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>DOM</title>
+    <style>
+      /* a */
+      .super:hover {
+        color: #0a0a0a;
+        text-shadow: 
+    /* Color 1 */ 1px 1px #61b4de,
+          /* Color 2 */ 2px 2px #91c467, /* Color 3 */ 3px 3px #f3a14b,
+          /* Color 4 */ 4px 4px #e84c50, /* Color 5 */ 5px 5px #4e5965;
+      }
+      .super {
+        color: #ededed;
+        font-family: Oswald;
+        font-size: 4em;
+        transition: 0.5s all ease;
+        text-transform: uppercase;
+        text-decoration: none;
+        text-shadow: 
+    /* Color 1 */ 1px 1px #61b4de, 2px 2px #61b4de,
+          3px 3px #61b4de, 4px 4px #61b4de, 5px 5px #61b4de,
+          /* Color 2 */ 6px 6px #91c467, 7px 7px #91c467, 8px 8px #91c467,
+          9px 9px #91c467, 10px 10px #91c467, /* Color 3 */ 11px 11px #f3a14b,
+          12px 12px #f3a14b, 13px 13px #f3a14b, 14px 14px #f3a14b,
+          15px 15px #f3a14b, /* Color 4 */ 16px 16px #e84c50, 17px 17px #e84c50,
+          18px 18px #e84c50, 19px 19px #e84c50, 20px 20px #e84c50,
+          /* Color 5 */ 21px 21px #4e5965, 22px 22px #4e5965, 23px 23px #4e5965,
+          24px 24px #4e5965, 25px 25px #4e5965;
+      }
+    </style>
+  </head>
+  <body>
+    <h1>쇼핑 리스트</h1>
+    <button id="super">슈퍼</button>
+    <p id="first">오늘 끝내자</p>
+    <p class="second">반드시!</p>
+    <input type="text" placeholder="리스트추가" />
+    <button id="enter">입력!</button>
+    <ul>
+      <a href=""></a>
+      <li random="23">노트북</li>
+      <li>가방</li>
+      <li>책</li>
+      <li>연습장</li>
+      <li>볼펜</li>
+      <li>지우개</li>
+    </ul>
+    <script>
+      //JS 위치는 보통 바디 끝나는 부분 : 순서는 태그들 먼저 -> JS 나중에
+      //DOM 선택하기 (어떤 태그)
+      // document.body.p1 xxx
+      // document.querySelector() ()안은 문자열 oooo
+      // 모든 선택은 querySelector로 사용가능('css선택자')
+      const h1 = document.querySelector("h1"); // 자주 사용 할떄는 변수로 지정
+      const second = document.querySelector("p.second");
+      const first = document.querySelector("p#first"); // 사용은 가능
+      // ID는 따로 getElementById('id') 사용 가능
+      const f2 = document.getElementById("first"); // 이게 더 빠르다
+      //여러 같은 태그 또는 같은 클래스 한꺼번에 (배열) 선택
+      const lis = document.querySelectorAll("li");
+      //반복문
+      for (const li of lis) {
+        li.style.color = "red";
+      }
+
+      //태그 속성 get(가져올때) / set(설정할때)
+      const li = document.querySelector("li"); // 첫번째나오는 li가져옴
+      console.log(li.getAttribute("random")); // 23
+      li.setAttribute("random", 100);
+      console.log(li.getAttribute("random")); // 100
+      // 클래스 관련 메소드 추가 / 제거 / 토글
+      h1.classList.add("super");
+      h1.classList.remove("super");
+      h1.classList.toggle("super"); // 없으면 추가 있으면 제거
+      // 태그에 이벤트 달기(버튼 눌렀을때)
+      const b1 = document.getElementById("super");
+      //b1.addEventListener(이벤트종류('' 문자열),실행함수)
+      b1.addEventListener("click", () => {
+        h1.classList.toggle("super");
+      });
+      // 인풋창 b2 버튼을 클릭하면 입력에 있는 글자를 리스트에 추가
+      const input = document.querySelector("input");
+      const b2 = document.getElementById("enter");
+      b2.addEventListener("click", () => {
+        //alert(input.value); // 입력착 내용
+        const ul = document.querySelector("ul");
+        //새 li태그 만들기
+        let newLi = document.createElement("li");
+        newLi.appendChild(document.createTextNode(input.value));
+        ul.appendChild(newLi);
+      });
+    </script>
+  </body>
+</html>
